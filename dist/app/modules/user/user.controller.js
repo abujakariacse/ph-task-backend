@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.studentControllers = void 0;
+exports.userControllers = void 0;
 const user_service_1 = require("./user.service");
 const createStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -25,6 +25,17 @@ const createStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.log(error);
     }
 });
-exports.studentControllers = {
+const getUserCoin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const email = (_a = req === null || req === void 0 ? void 0 : req.body) === null || _a === void 0 ? void 0 : _a.email;
+    const result = yield user_service_1.userServices.getUserCoinFromDB(email);
+    res.status(200).json({
+        success: true,
+        message: "Coin retrive successfully",
+        data: result,
+    });
+});
+exports.userControllers = {
     createStudent,
+    getUserCoin,
 };

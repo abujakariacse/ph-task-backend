@@ -15,6 +15,17 @@ const createStudent = async (req: Request, res: Response) => {
   }
 };
 
-export const studentControllers = {
+const getUserCoin = async (req: Request, res: Response) => {
+  const email = req?.body?.email;
+  const result = await userServices.getUserCoinFromDB(email);
+  res.status(200).json({
+    success: true,
+    message: "Coin retrive successfully",
+    data: result,
+  });
+};
+
+export const userControllers = {
   createStudent,
+  getUserCoin,
 };

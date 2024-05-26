@@ -7,5 +7,6 @@ exports.userRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const user_controller_1 = require("./user.controller");
 const router = express_1.default.Router();
-router.post("/create-user", user_controller_1.studentControllers.createStudent);
+router.post("/create-user", user_controller_1.userControllers.createStudent);
+router.get("/get-coin", user_controller_1.userControllers.getUserCoin);
 exports.userRoutes = router;

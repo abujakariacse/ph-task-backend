@@ -1,8 +1,10 @@
 import express from "express";
-import { studentControllers } from "./user.controller";
+import { userControllers } from "./user.controller";
 
 const router = express.Router();
 
-router.post("/create-user", studentControllers.createStudent);
+router.post("/create-user", userControllers.createStudent);
+
+router.get("/get-coin", userControllers.getUserCoin);
 
 export const userRoutes = router;

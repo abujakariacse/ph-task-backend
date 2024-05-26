@@ -15,6 +15,12 @@ const createUserIntoDB = async (user: TUser) => {
   return result;
 };
 
+const getUserCoinFromDB = async (email: string) => {
+  const result = User.findOne({ email }, "coin");
+  return result;
+};
+
 export const userServices = {
   createUserIntoDB,
+  getUserCoinFromDB,
 };

@@ -22,6 +22,11 @@ const createUserIntoDB = (user) => __awaiter(void 0, void 0, void 0, function* (
     const result = yield user_model_1.User.create(user);
     return result;
 });
+const getUserCoinFromDB = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = user_model_1.User.findOne({ email }, "coin");
+    return result;
+});
 exports.userServices = {
     createUserIntoDB,
+    getUserCoinFromDB,
 };
