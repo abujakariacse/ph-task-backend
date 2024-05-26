@@ -3,10 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.recipeRoutes = void 0;
+exports.paymentRoutes = void 0;
 const express_1 = __importDefault(require("express"));
-const recipe_controller_1 = require("./recipe.controller");
+const purchase_controller_1 = require("./purchase.controller");
 const router = express_1.default.Router();
-router.post("/create-recipe", recipe_controller_1.recipeControllers.createRecipe);
-router.post("/view-recipe", recipe_controller_1.recipeControllers.viewRecipe);
-exports.recipeRoutes = router;
+router.post("/create-checkout-session", purchase_controller_1.purchaseControllers.makePayment);
+exports.paymentRoutes = router;

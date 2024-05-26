@@ -31,7 +31,7 @@ const recipeSchema = new mongoose_1.Schema({
         type: String,
         required: [true, "Country is required"],
     },
-    purchased_by: {
+    purchasedBy: {
         type: [String],
         default: [],
     },

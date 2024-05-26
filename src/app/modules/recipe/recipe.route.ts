@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.post("/create-recipe", recipeControllers.createRecipe);
 
+router.post("/view-recipe", recipeControllers.viewRecipe);
+
 export const recipeRoutes = router;

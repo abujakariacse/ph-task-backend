@@ -25,6 +25,19 @@ const createRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         console.log(err);
     }
 });
+const viewRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    const viewerEmail = (_a = req === null || req === void 0 ? void 0 : req.body) === null || _a === void 0 ? void 0 : _a.viewerEmail;
+    const creatorEmail = req.body.creatorEmail;
+    const recipeId = (_b = req === null || req === void 0 ? void 0 : req.body) === null || _b === void 0 ? void 0 : _b.recipeId;
+    const result = yield recipe_service_1.recipeServices.viewRecipe(viewerEmail, creatorEmail, recipeId);
+    res.status(200).json({
+        success: true,
+        message: "Recipe details updated successfully",
+        data: result,
+    });
+});
 exports.recipeControllers = {
     createRecipe,
+    viewRecipe,
 };

@@ -7,5 +7,5 @@ export type TRecipe = {
   category: string;
   creatorEmail: string;
   watchCount: number;
-  purchased_by: string[];
+  purchasedBy: string[];
 };

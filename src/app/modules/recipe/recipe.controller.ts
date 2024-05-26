@@ -15,6 +15,24 @@ const createRecipe = async (req: Request, res: Response) => {
   }
 };
 
+const viewRecipe = async (req: Request, res: Response) => {
+  const viewerEmail = req?.body?.viewerEmail;
+  const creatorEmail = req.body.creatorEmail;
+  const recipeId = req?.body?.recipeId;
+
+  const result = await recipeServices.viewRecipe(
+    viewerEmail,
+    creatorEmail,
+    recipeId
+  );
+  res.status(200).json({
+    success: true,
+    message: "Recipe details updated successfully",
+    data: result,
+  });
+};
+
 export const recipeControllers = {
   createRecipe,
+  viewRecipe,
 };

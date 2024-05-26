@@ -40,6 +40,30 @@ const createRecipeIntoDB = (recipe) => __awaiter(void 0, void 0, void 0, functio
         session.endSession();
     }
 });
+const viewRecipe = (viewerEmail, creatorEmail, recipeId) => __awaiter(void 0, void 0, void 0, function* () {
+    const session = yield mongoose_1.default.startSession();
+    session.startTransaction();
+    try {
+        // Update viewer's coin decrement by 10
+        yield user_model_1.User.findOneAndUpdate({ email: viewerEmail }, { $inc: { coin: -10 } }, { session });
+        // Update recipe creator's coin increment by 1
+        yield user_model_1.User.findOneAndUpdate({ email: creatorEmail }, { $inc: { coin: 1 } }, { session });
+        // Update recipe details: Increment watchCount by 1, push viewerEmail to purchasedBy array
+        const updatedRecipe = yield recipe_model_1.Recipe.findByIdAndUpdate({ _id: recipeId }, {
+            $inc: { watchCount: 1 },
+            $addToSet: { purchasedBy: viewerEmail },
+        }, { new: true, session });
+        yield session.commitTransaction();
+        session.endSession();
+        return updatedRecipe;
+    }
+    catch (error) {
+        yield session.abortTransaction();
+        session.endSession();
+        throw new Error("Error updating recipe details: " + error.message);
+    }
+});
 exports.recipeServices = {
     createRecipeIntoDB,
+    viewRecipe,
 };
