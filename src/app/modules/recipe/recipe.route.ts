@@ -15,4 +15,6 @@ router.get("/filter", recipeControllers.filterRecipeByCategory);
 
 router.get("/suggestion", recipeControllers.getSuggestions);
 
+router.get("/find", recipeControllers.findRecipe);
+
 export const recipeRoutes = router;

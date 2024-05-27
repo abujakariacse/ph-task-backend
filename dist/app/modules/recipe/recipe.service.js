@@ -83,7 +83,11 @@ const getSuggestions = (query) => __awaiter(void 0, void 0, void 0, function* ()
     const recipes = yield recipe_model_1.Recipe.find({
         $or: [{ country: query === null || query === void 0 ? void 0 : query.country }, { category: query === null || query === void 0 ? void 0 : query.category }],
     });
-    console.log({ recipes });
+    return recipes;
+});
+const getFoundRecipe = (searchText) => __awaiter(void 0, void 0, void 0, function* () {
+    const regex = new RegExp(searchText, "i");
+    const recipes = yield recipe_model_1.Recipe.find({ recipeName: { $regex: regex } });
     return recipes;
 });
 exports.recipeServices = {
@@ -93,4 +97,5 @@ exports.recipeServices = {
     getSingleRecipe,
     filterRecipe,
     getSuggestions,
+    getFoundRecipe,
 };

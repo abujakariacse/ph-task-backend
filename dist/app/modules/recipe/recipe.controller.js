@@ -73,13 +73,21 @@ const getSuggestions = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const query = req.query;
     if ((query === null || query === void 0 ? void 0 : query.country) !== undefined && (query === null || query === void 0 ? void 0 : query.category) !== undefined) {
         const result = yield recipe_service_1.recipeServices.getSuggestions(query);
-        console.log({ result });
         res.status(200).json({
             success: true,
             message: "Sugegstions retrieve successfully",
             data: result,
         });
     }
+});
+const findRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { search } = req.query;
+    const result = yield recipe_service_1.recipeServices.getFoundRecipe(search);
+    res.status(200).json({
+        success: true,
+        message: "Search result retrieve",
+        data: result,
+    });
 });
 exports.recipeControllers = {
     createRecipe,
@@ -88,4 +96,5 @@ exports.recipeControllers = {
     getSingleRecipe,
     filterRecipeByCategory,
     getSuggestions,
+    findRecipe,
 };

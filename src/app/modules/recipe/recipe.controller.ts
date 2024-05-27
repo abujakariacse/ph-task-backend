@@ -85,6 +85,16 @@ const getSuggestions = async (req: Request, res: Response) => {
     });
   }
 };
+
+const findRecipe = async (req: Request, res: Response) => {
+  const { search } = req.query;
+  const result = await recipeServices.getFoundRecipe(search as string);
+  res.status(200).json({
+    success: true,
+    message: "Search result retrieve",
+    data: result,
+  });
+};
 export const recipeControllers = {
   createRecipe,
   viewRecipe,
@@ -92,4 +102,5 @@ export const recipeControllers = {
   getSingleRecipe,
   filterRecipeByCategory,
   getSuggestions,
+  findRecipe,
 };

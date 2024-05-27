@@ -107,6 +107,12 @@ const getSuggestions = async (query: TSuggestionQuery) => {
   return recipes;
 };
 
+const getFoundRecipe = async (searchText: string) => {
+  const regex = new RegExp(searchText, "i");
+  const recipes = await Recipe.find({ recipeName: { $regex: regex } });
+  return recipes;
+};
+
 export const recipeServices = {
   createRecipeIntoDB,
   viewRecipe,
@@ -114,4 +120,5 @@ export const recipeServices = {
   getSingleRecipe,
   filterRecipe,
   getSuggestions,
+  getFoundRecipe,
 };
