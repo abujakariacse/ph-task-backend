@@ -44,8 +44,17 @@ const rechargeCoin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         data: result,
     });
 });
+const getUserAndRecipeCount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_service_1.userServices.getUserCountRecipeCount();
+    res.status(200).json({
+        success: true,
+        message: "User and Recipe retrive successfully",
+        data: result,
+    });
+});
 exports.userControllers = {
     createStudent,
     getUserCoin,
     rechargeCoin,
+    getUserAndRecipeCount,
 };

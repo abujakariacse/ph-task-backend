@@ -36,8 +36,18 @@ const rechargeCoin = async (req: Request, res: Response) => {
   });
 };
 
+const getUserAndRecipeCount = async (req: Request, res: Response) => {
+  const result = await userServices.getUserCountRecipeCount();
+  res.status(200).json({
+    success: true,
+    message: "User and Recipe retrive successfully",
+    data: result,
+  });
+};
+
 export const userControllers = {
   createStudent,
   getUserCoin,
   rechargeCoin,
+  getUserAndRecipeCount,
 };

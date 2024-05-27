@@ -10,9 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userServices = void 0;
+const recipe_model_1 = require("../recipe/recipe.model");
 const user_model_1 = require("./user.model");
 const createUserIntoDB = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const email = user === null || user === void 0 ? void 0 : user.email;
+    if (!email) {
+        console.log("Data not found");
+        return;
+    }
     const isUserExist = yield user_model_1.User.findOne({ email });
     if (isUserExist) {
         return {
@@ -32,8 +37,17 @@ const updateUserCoin = (data) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield user_model_1.User.findOneAndUpdate({ email: data === null || data === void 0 ? void 0 : data.email }, { $inc: { coin: data === null || data === void 0 ? void 0 : data.coin } }, { new: true });
     return result;
 });
+const getUserCountRecipeCount = () => __awaiter(void 0, void 0, void 0, function* () {
+    const userCount = yield user_model_1.User.countDocuments({});
+    const recipeCount = yield recipe_model_1.Recipe.countDocuments({});
+    return {
+        userCount: userCount,
+        recipeCount: recipeCount,
+    };
+});
 exports.userServices = {
     createUserIntoDB,
     getUserCoinFromDB,
     updateUserCoin,
+    getUserCountRecipeCount,
 };

@@ -1,8 +1,14 @@
+import { Recipe } from "../recipe/recipe.model";
 import { TCoinIncrement, TUser } from "./user.interface";
 import { User } from "./user.model";
 
 const createUserIntoDB = async (user: TUser) => {
   const email = user?.email;
+  if (!email) {
+    console.log("Data not found");
+
+    return;
+  }
   const isUserExist = await User.findOne({ email });
 
   if (isUserExist) {
@@ -32,8 +38,20 @@ const updateUserCoin = async (data: TCoinIncrement) => {
   return result;
 };
 
+const getUserCountRecipeCount = async () => {
+  const userCount = await User.countDocuments({});
+
+  const recipeCount = await Recipe.countDocuments({});
+
+  return {
+    userCount: userCount,
+    recipeCount: recipeCount,
+  };
+};
+
 export const userServices = {
   createUserIntoDB,
   getUserCoinFromDB,
   updateUserCoin,
+  getUserCountRecipeCount,
 };

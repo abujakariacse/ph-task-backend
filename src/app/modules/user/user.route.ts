@@ -9,4 +9,6 @@ router.post("/get-coin", userControllers.getUserCoin);
 
 router.post("/recharge-coin", userControllers.rechargeCoin);
 
+router.get("/user-recipe", userControllers.getUserAndRecipeCount);
+
 export const userRoutes = router;
