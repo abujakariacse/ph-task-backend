@@ -1,6 +1,6 @@
 import mongoose, { ObjectId } from "mongoose";
 import { User } from "../user/user.model";
-import { TQueryParam, TRecipe } from "./recipe.interface";
+import { TQueryParam, TRecipe, TSuggestionQuery } from "./recipe.interface";
 import { Recipe } from "./recipe.model";
 import { Types } from "mongoose";
 
@@ -99,10 +99,19 @@ const filterRecipe = async (categories: TQueryParam) => {
   return recipes;
 };
 
+const getSuggestions = async (query: TSuggestionQuery) => {
+  const recipes = await Recipe.find({
+    $or: [{ country: query?.country }, { category: query?.category }],
+  });
+
+  return recipes;
+};
+
 export const recipeServices = {
   createRecipeIntoDB,
   viewRecipe,
   getAllRecipes,
   getSingleRecipe,
   filterRecipe,
+  getSuggestions,
 };

@@ -62,7 +62,6 @@ const filterRecipeByCategory = (req, res) => __awaiter(void 0, void 0, void 0, f
     if (typeof query === undefined) {
         query = [];
     }
-    console.log({ query, line: "65" });
     const result = yield recipe_service_1.recipeServices.filterRecipe(query);
     res.status(200).json({
         status: true,
@@ -70,10 +69,23 @@ const filterRecipeByCategory = (req, res) => __awaiter(void 0, void 0, void 0, f
         data: result,
     });
 });
+const getSuggestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = req.query;
+    if ((query === null || query === void 0 ? void 0 : query.country) !== undefined && (query === null || query === void 0 ? void 0 : query.category) !== undefined) {
+        const result = yield recipe_service_1.recipeServices.getSuggestions(query);
+        console.log({ result });
+        res.status(200).json({
+            success: true,
+            message: "Sugegstions retrieve successfully",
+            data: result,
+        });
+    }
+});
 exports.recipeControllers = {
     createRecipe,
     viewRecipe,
     retriveAllRecipes,
     getSingleRecipe,
     filterRecipeByCategory,
+    getSuggestions,
 };

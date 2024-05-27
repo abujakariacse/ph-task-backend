@@ -77,6 +77,12 @@ const filterRecipe = (categories) => __awaiter(void 0, void 0, void 0, function*
         throw new Error("Categories should be an array");
     }
     const recipes = yield recipe_model_1.Recipe.find({ category: { $in: categories } });
+    return recipes;
+});
+const getSuggestions = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const recipes = yield recipe_model_1.Recipe.find({
+        $or: [{ country: query === null || query === void 0 ? void 0 : query.country }, { category: query === null || query === void 0 ? void 0 : query.category }],
+    });
     console.log({ recipes });
     return recipes;
 });
@@ -86,4 +92,5 @@ exports.recipeServices = {
     getAllRecipes,
     getSingleRecipe,
     filterRecipe,
+    getSuggestions,
 };

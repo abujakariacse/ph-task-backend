@@ -13,4 +13,6 @@ router.post("/view-recipe", recipeControllers.viewRecipe);
 
 router.get("/filter", recipeControllers.filterRecipeByCategory);
 
+router.get("/suggestion", recipeControllers.getSuggestions);
+
 export const recipeRoutes = router;

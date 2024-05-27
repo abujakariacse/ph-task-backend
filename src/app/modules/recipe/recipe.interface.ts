@@ -15,3 +15,8 @@ export type TQueryParam = {
     category: string[];
   };
 };
+
+export type TSuggestionQuery = {
+  country: string;
+  category: string;
+};

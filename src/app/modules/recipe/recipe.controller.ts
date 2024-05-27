@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { recipeServices } from "./recipe.service";
 import { Types } from "mongoose";
-import { TQueryParam } from "./recipe.interface";
+import { TQueryParam, TSuggestionQuery } from "./recipe.interface";
 
 const createRecipe = async (req: Request, res: Response) => {
   try {
@@ -70,10 +70,26 @@ const filterRecipeByCategory = async (req: Request, res: Response) => {
   });
 };
 
+const getSuggestions = async (req: Request, res: Response) => {
+  const query = req.query;
+
+  if (query?.country !== undefined && query?.category !== undefined) {
+    const result = await recipeServices.getSuggestions(
+      query as TSuggestionQuery
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Sugegstions retrieve successfully",
+      data: result,
+    });
+  }
+};
 export const recipeControllers = {
   createRecipe,
   viewRecipe,
   retriveAllRecipes,
   getSingleRecipe,
   filterRecipeByCategory,
+  getSuggestions,
 };
