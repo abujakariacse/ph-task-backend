@@ -2,8 +2,11 @@ import mongoose, { ObjectId } from "mongoose";
 import { User } from "../user/user.model";
 import { TRecipe } from "./recipe.interface";
 import { Recipe } from "./recipe.model";
+import { Types } from "mongoose";
 
 const createRecipeIntoDB = async (recipe: TRecipe) => {
+  console.log({ recipe });
+
   const creatorEmail = recipe.creatorEmail;
   const session = await mongoose.startSession();
 
@@ -78,7 +81,17 @@ const viewRecipe = async (
   }
 };
 
+const getAllRecipes = async () => {
+  const result = await Recipe.find({});
+  return result;
+};
+const getSingleRecipe = async (id: string) => {
+  const result = await Recipe.findOne({ _id: id });
+  return result;
+};
 export const recipeServices = {
   createRecipeIntoDB,
   viewRecipe,
+  getAllRecipes,
+  getSingleRecipe,
 };

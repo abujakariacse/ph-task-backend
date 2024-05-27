@@ -17,6 +17,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const user_model_1 = require("../user/user.model");
 const recipe_model_1 = require("./recipe.model");
 const createRecipeIntoDB = (recipe) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log({ recipe });
     const creatorEmail = recipe.creatorEmail;
     const session = yield mongoose_1.default.startSession();
     try {
@@ -63,7 +64,17 @@ const viewRecipe = (viewerEmail, creatorEmail, recipeId) => __awaiter(void 0, vo
         throw new Error("Error updating recipe details: " + error.message);
     }
 });
+const getAllRecipes = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield recipe_model_1.Recipe.find({});
+    return result;
+});
+const getSingleRecipe = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield recipe_model_1.Recipe.findOne({ _id: id });
+    return result;
+});
 exports.recipeServices = {
     createRecipeIntoDB,
     viewRecipe,
+    getAllRecipes,
+    getSingleRecipe,
 };

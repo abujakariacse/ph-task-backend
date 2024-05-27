@@ -1,11 +1,13 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import config from "../../config";
+
+const stripe = require("stripe")(config.stripe_secret_key);
 
 const makePaymentAndAddCoinToProfile = async (prod: any) => {
+  console.log({ prod });
   const product = await stripe.products.create({
     name: prod.name,
   });
 
-  console.log({ product });
   let price;
 
   if (product) {
@@ -24,10 +26,12 @@ const makePaymentAndAddCoinToProfile = async (prod: any) => {
         },
       ],
       mode: "payment",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
-      customer_email: "demo@gmail.com",
+      success_url: "http://localhost:5173/payment-success",
+      cancel_url: "http://localhost:5173/payment-failed",
+      customer_email: prod?.customerEmail,
     });
+    console.log({ session });
+
     return session;
   }
 };

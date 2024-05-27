@@ -37,7 +37,26 @@ const viewRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         data: result,
     });
 });
+const retriveAllRecipes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield recipe_service_1.recipeServices.getAllRecipes();
+    res.status(200).json({
+        success: true,
+        message: "Recipes retrive successfully",
+        data: result,
+    });
+});
+const getSingleRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.query;
+    const result = yield recipe_service_1.recipeServices.getSingleRecipe(id);
+    res.status(200).json({
+        success: true,
+        message: "Recipe retrieve successfully",
+        data: result,
+    });
+});
 exports.recipeControllers = {
     createRecipe,
     viewRecipe,
+    retriveAllRecipes,
+    getSingleRecipe,
 };

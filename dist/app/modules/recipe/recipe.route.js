@@ -7,6 +7,8 @@ exports.recipeRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const recipe_controller_1 = require("./recipe.controller");
 const router = express_1.default.Router();
+router.get("/", recipe_controller_1.recipeControllers.retriveAllRecipes);
+router.get("/get-one", recipe_controller_1.recipeControllers.getSingleRecipe);
 router.post("/create-recipe", recipe_controller_1.recipeControllers.createRecipe);
 router.post("/view-recipe", recipe_controller_1.recipeControllers.viewRecipe);
 exports.recipeRoutes = router;

@@ -8,14 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.purchaseServices = void 0;
-const stripe = require("stripe")("sk_test_51L3CyAHOPT1y061MMwyV3Ch7IqE68OBUUJ8Ib0PGk6NVzKWOHW5ghwipv6yn0Gjjrwgo6S1lBNxA0TA6vtqJvKaw001Pna2zaR");
+const config_1 = __importDefault(require("../../config"));
+const stripe = require("stripe")(config_1.default.stripe_secret_key);
 const makePaymentAndAddCoinToProfile = (prod) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log({ prod });
     const product = yield stripe.products.create({
         name: prod.name,
     });
-    console.log({ product });
     let price;
     if (product) {
         price = yield stripe.prices.create({
@@ -33,10 +37,11 @@ const makePaymentAndAddCoinToProfile = (prod) => __awaiter(void 0, void 0, void 
                 },
             ],
             mode: "payment",
-            success_url: "http://localhost:3000/success",
-            cancel_url: "http://localhost:3000/cancel",
-            customer_email: "demo@gmail.com",
+            success_url: "http://localhost:5173/payment-success",
+            cancel_url: "http://localhost:5173/payment-failed",
+            customer_email: prod === null || prod === void 0 ? void 0 : prod.customerEmail,
         });
+        console.log({ session });
         return session;
     }
 });

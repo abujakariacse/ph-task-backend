@@ -16,8 +16,10 @@ const createUserIntoDB = async (user: TUser) => {
 };
 
 const getUserCoinFromDB = async (email: string) => {
-  const result = User.findOne({ email }, "coin");
-  return result;
+  if (email) {
+    const result = await User.findOne({ email }, "coin");
+    return result;
+  }
 };
 
 export const userServices = {

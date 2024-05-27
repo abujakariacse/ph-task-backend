@@ -16,6 +16,6 @@ app.use("/api/v1/payment", purchase_route_1.paymentRoutes);
 app.use("/api/v1/recipes", recipe_route_1.recipeRoutes);
 app.use("/api/v1/users", user_route_1.userRoutes);
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("App is running");
 });
 exports.default = app;

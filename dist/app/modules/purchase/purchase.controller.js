@@ -12,9 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.purchaseControllers = void 0;
 const purchase_service_1 = require("./purchase.service");
 const makePayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Controller hitted");
     const product = req.body;
-    console.log(product);
     const result = yield purchase_service_1.purchaseServices.makePaymentAndAddCoinToProfile(product);
     res.json(result);
 });

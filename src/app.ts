@@ -14,7 +14,7 @@ app.use("/api/v1/recipes", recipeRoutes);
 app.use("/api/v1/users", userRoutes);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("App is running");
 });
 
 export default app;
