@@ -72,9 +72,18 @@ const getSingleRecipe = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield recipe_model_1.Recipe.findOne({ _id: id });
     return result;
 });
+const filterRecipe = (categories) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!Array.isArray(categories)) {
+        throw new Error("Categories should be an array");
+    }
+    const recipes = yield recipe_model_1.Recipe.find({ category: { $in: categories } });
+    console.log({ recipes });
+    return recipes;
+});
 exports.recipeServices = {
     createRecipeIntoDB,
     viewRecipe,
     getAllRecipes,
     getSingleRecipe,
+    filterRecipe,
 };

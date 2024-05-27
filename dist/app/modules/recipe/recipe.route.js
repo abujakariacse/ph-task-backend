@@ -11,4 +11,5 @@ router.get("/", recipe_controller_1.recipeControllers.retriveAllRecipes);
 router.get("/get-one", recipe_controller_1.recipeControllers.getSingleRecipe);
 router.post("/create-recipe", recipe_controller_1.recipeControllers.createRecipe);
 router.post("/view-recipe", recipe_controller_1.recipeControllers.viewRecipe);
+router.get("/filter", recipe_controller_1.recipeControllers.filterRecipeByCategory);
 exports.recipeRoutes = router;

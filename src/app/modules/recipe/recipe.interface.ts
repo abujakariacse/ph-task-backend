@@ -9,3 +9,9 @@ export type TRecipe = {
   watchCount: number;
   purchasedBy: string[];
 };
+
+export type TQueryParam = {
+  query: {
+    category: string[];
+  };
+};

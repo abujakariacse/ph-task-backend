@@ -1,6 +1,6 @@
 import mongoose, { ObjectId } from "mongoose";
 import { User } from "../user/user.model";
-import { TRecipe } from "./recipe.interface";
+import { TQueryParam, TRecipe } from "./recipe.interface";
 import { Recipe } from "./recipe.model";
 import { Types } from "mongoose";
 
@@ -85,13 +85,24 @@ const getAllRecipes = async () => {
   const result = await Recipe.find({});
   return result;
 };
+
 const getSingleRecipe = async (id: string) => {
   const result = await Recipe.findOne({ _id: id });
   return result;
 };
+
+const filterRecipe = async (categories: TQueryParam) => {
+  if (!Array.isArray(categories)) {
+    throw new Error("Categories should be an array");
+  }
+  const recipes = await Recipe.find({ category: { $in: categories } });
+  return recipes;
+};
+
 export const recipeServices = {
   createRecipeIntoDB,
   viewRecipe,
   getAllRecipes,
   getSingleRecipe,
+  filterRecipe,
 };

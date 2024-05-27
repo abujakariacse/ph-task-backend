@@ -54,9 +54,26 @@ const getSingleRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function
         data: result,
     });
 });
+const filterRecipeByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let query = req.query.category;
+    if (typeof query === "string") {
+        query = [query];
+    }
+    if (typeof query === undefined) {
+        query = [];
+    }
+    console.log({ query, line: "65" });
+    const result = yield recipe_service_1.recipeServices.filterRecipe(query);
+    res.status(200).json({
+        status: true,
+        message: "Recipe filtered successfully",
+        data: result,
+    });
+});
 exports.recipeControllers = {
     createRecipe,
     viewRecipe,
     retriveAllRecipes,
     getSingleRecipe,
+    filterRecipeByCategory,
 };

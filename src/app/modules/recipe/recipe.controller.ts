@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { recipeServices } from "./recipe.service";
 import { Types } from "mongoose";
+import { TQueryParam } from "./recipe.interface";
 
 const createRecipe = async (req: Request, res: Response) => {
   try {
@@ -41,6 +42,7 @@ const retriveAllRecipes = async (req: Request, res: Response) => {
     data: result,
   });
 };
+
 const getSingleRecipe = async (req: Request, res: Response) => {
   const { id } = req.query;
   const result = await recipeServices.getSingleRecipe(id as string);
@@ -51,9 +53,27 @@ const getSingleRecipe = async (req: Request, res: Response) => {
   });
 };
 
+const filterRecipeByCategory = async (req: Request, res: Response) => {
+  let query = req.query.category;
+  if (typeof query === "string") {
+    query = [query];
+  }
+  if (typeof query === undefined) {
+    query = [];
+  }
+
+  const result = await recipeServices.filterRecipe(query as TQueryParam);
+  res.status(200).json({
+    status: true,
+    message: "Recipe filtered successfully",
+    data: result,
+  });
+};
+
 export const recipeControllers = {
   createRecipe,
   viewRecipe,
   retriveAllRecipes,
   getSingleRecipe,
+  filterRecipeByCategory,
 };

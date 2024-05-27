@@ -11,4 +11,6 @@ router.post("/create-recipe", recipeControllers.createRecipe);
 
 router.post("/view-recipe", recipeControllers.viewRecipe);
 
+router.get("/filter", recipeControllers.filterRecipeByCategory);
+
 export const recipeRoutes = router;
