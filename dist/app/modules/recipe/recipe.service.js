@@ -17,7 +17,6 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const user_model_1 = require("../user/user.model");
 const recipe_model_1 = require("./recipe.model");
 const createRecipeIntoDB = (recipe) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log({ recipe });
     const creatorEmail = recipe.creatorEmail;
     const session = yield mongoose_1.default.startSession();
     try {

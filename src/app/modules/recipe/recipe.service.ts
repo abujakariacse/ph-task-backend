@@ -5,8 +5,6 @@ import { Recipe } from "./recipe.model";
 import { Types } from "mongoose";
 
 const createRecipeIntoDB = async (recipe: TRecipe) => {
-  console.log({ recipe });
-
   const creatorEmail = recipe.creatorEmail;
   const session = await mongoose.startSession();
 

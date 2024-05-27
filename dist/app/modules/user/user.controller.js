@@ -35,7 +35,17 @@ const getUserCoin = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         data: result,
     });
 });
+const rechargeCoin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    const result = yield user_service_1.userServices.updateUserCoin(data);
+    res.status(200).json({
+        success: true,
+        message: "Coin added to your account",
+        data: result,
+    });
+});
 exports.userControllers = {
     createStudent,
     getUserCoin,
+    rechargeCoin,
 };

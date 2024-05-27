@@ -3,6 +3,7 @@ import cors from "cors";
 import { userRoutes } from "./app/modules/user/user.route";
 import { recipeRoutes } from "./app/modules/recipe/recipe.route";
 import { paymentRoutes } from "./app/modules/purchase/purchase.route";
+
 const app: Application = express();
 
 app.use(express.json());

@@ -28,7 +28,12 @@ const getUserCoinFromDB = (email) => __awaiter(void 0, void 0, void 0, function*
         return result;
     }
 });
+const updateUserCoin = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.User.findOneAndUpdate({ email: data === null || data === void 0 ? void 0 : data.email }, { $inc: { coin: data === null || data === void 0 ? void 0 : data.coin } }, { new: true });
+    return result;
+});
 exports.userServices = {
     createUserIntoDB,
     getUserCoinFromDB,
+    updateUserCoin,
 };

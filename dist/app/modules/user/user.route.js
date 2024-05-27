@@ -9,4 +9,5 @@ const user_controller_1 = require("./user.controller");
 const router = express_1.default.Router();
 router.post("/create-user", user_controller_1.userControllers.createStudent);
 router.post("/get-coin", user_controller_1.userControllers.getUserCoin);
+router.post("/recharge-coin", user_controller_1.userControllers.rechargeCoin);
 exports.userRoutes = router;

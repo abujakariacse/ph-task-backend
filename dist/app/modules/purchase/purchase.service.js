@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.purchaseServices = void 0;
 const config_1 = __importDefault(require("../../config"));
+const generate_unique_id_1 = __importDefault(require("generate-unique-id"));
 const stripe = require("stripe")(config_1.default.stripe_secret_key);
 const makePaymentAndAddCoinToProfile = (prod) => __awaiter(void 0, void 0, void 0, function* () {
     console.log({ prod });
@@ -28,6 +29,10 @@ const makePaymentAndAddCoinToProfile = (prod) => __awaiter(void 0, void 0, void 
             currency: "usd",
         });
     }
+    const transactionId = (0, generate_unique_id_1.default)({
+        length: 32,
+        useLetters: true,
+    });
     if (price.id) {
         let session = yield stripe.checkout.sessions.create({
             line_items: [
@@ -37,11 +42,10 @@ const makePaymentAndAddCoinToProfile = (prod) => __awaiter(void 0, void 0, void 
                 },
             ],
             mode: "payment",
-            success_url: "http://localhost:5173/payment-success",
+            success_url: `http://localhost:5173/payment-success?transactionId=${transactionId}&user=${prod === null || prod === void 0 ? void 0 : prod.customerEmail}&quantity=${prod === null || prod === void 0 ? void 0 : prod.quantity}`,
             cancel_url: "http://localhost:5173/payment-failed",
             customer_email: prod === null || prod === void 0 ? void 0 : prod.customerEmail,
         });
-        console.log({ session });
         return session;
     }
 });

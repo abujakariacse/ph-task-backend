@@ -1,4 +1,4 @@
-import { TUser } from "./user.interface";
+import { TCoinIncrement, TUser } from "./user.interface";
 import { User } from "./user.model";
 
 const createUserIntoDB = async (user: TUser) => {
@@ -22,7 +22,18 @@ const getUserCoinFromDB = async (email: string) => {
   }
 };
 
+const updateUserCoin = async (data: TCoinIncrement) => {
+  const result = await User.findOneAndUpdate(
+    { email: data?.email },
+    { $inc: { coin: data?.coin } },
+    { new: true }
+  );
+
+  return result;
+};
+
 export const userServices = {
   createUserIntoDB,
   getUserCoinFromDB,
+  updateUserCoin,
 };

@@ -4,3 +4,8 @@ export type TUser = {
   email: string;
   coin: number;
 };
+
+export type TCoinIncrement = {
+  email: string;
+  coin: number;
+};

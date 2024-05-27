@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { userServices } from "./user.service";
+import { TCoinIncrement } from "./user.interface";
 
 const createStudent = async (req: Request, res: Response) => {
   try {
@@ -25,7 +26,18 @@ const getUserCoin = async (req: Request, res: Response) => {
   });
 };
 
+const rechargeCoin = async (req: Request, res: Response) => {
+  const data = req.body;
+  const result = await userServices.updateUserCoin(data as TCoinIncrement);
+  res.status(200).json({
+    success: true,
+    message: "Coin added to your account",
+    data: result,
+  });
+};
+
 export const userControllers = {
   createStudent,
   getUserCoin,
+  rechargeCoin,
 };
